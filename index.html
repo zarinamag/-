@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Музыка и Характер</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2 {
+            text-align: center;
+        }
+        .question {
+            margin-bottom: 15px;
+        }
+        .question label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .result {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Музыка и Характер</h1>
+    <p>Ответьте на вопросы и узнайте, какая музыка подходит вашему характеру.</p>
+
+    <form id="quizForm">
+        <div class="question">
+            <label>1. Вам нравится находиться в больших компаниях?</label>
+            <input type="radio" name="q1" value="yes" required> Да
+            <input type="radio" name="q1" value="no"> Нет
+        </div>
+        <div class="question">
+            <label>2. Вы предпочитаете планировать свои действия заранее?</label>
+            <input type="radio" name="q2" value="yes" required> Да
+            <input type="radio" name="q2" value="no"> Нет
+        </div>
+        <div class="question">
+            <label>3. Вы легко воспринимаете критику?</label>
+            <input type="radio" name="q3" value="yes" required> Да
+            <input type="radio" name="q3" value="no"> Нет
+        </div>
+        <div class="question">
+            <label>4. Вы часто размышляете о смысле жизни?</label>
+            <input type="radio" name="q4" value="yes" required> Да
+            <input type="radio" name="q4" value="no"> Нет
+        </div>
+        <div class="question">
+            <label>5. Вам нравится быть в центре внимания?</label>
+            <input type="radio" name="q5" value="yes" required> Да
+            <input type="radio" name="q5" value="no"> Нет
+        </div>
+        <div class="question">
+            <label>6. Вы предпочитаете спокойный и стабильный ритм жизни?</label>
+            <input type="radio" name="q6" value="yes" required> Да
+            <input type="radio" name="q6" value="no"> Нет
+        </div>
+        <div class="question">
+            <label>7. Вы склонны рисковать ради новых впечатлений?</label>
+            <input type="radio" name="q7" value="yes" required> Да
+            <input type="radio" name="q7" value="no"> Нет
+        </div>
+        <div class="question">
+            <label>8. Вы часто чувствуете глубокие эмоции при прослушивании музыки?</label>
+            <input type="radio" name="q8" value="yes" required> Да
+            <input type="radio" name="q8" value="no"> Нет
+        </div>
+        <div class="question">
+            <label>9. Вы легко адаптируетесь к изменениям?</label>
+            <input type="radio" name="q9" value="yes" required> Да
+            <input type="radio" name="q9" value="no"> Нет
+        </div>
+        <div class="question">
+            <label>10. Вы больше цените новизну, чем традиции?</label>
+            <input type="radio" name="q10" value="yes" required> Да
+            <input type="radio" name="q10" value="no"> Нет
+        </div>
+
+        <button type="submit">Узнать результат</button>
+    </form>
+
+    <div class="result" id="result">
+        <h2>Ваш тип музыки:</h2>
+        <p id="musicType"></p>
+    </div>
+</div>
+
+<script>
+    document.getElementById('quizForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        let score = 0;
+        const form = new FormData(this);
+
+        for (let [key, value] of form.entries()) {
+            if (value === 'yes') {
+                score++;
+            }
+        }
+
+        let resultText = '';
+        if (score >= 9) {
+            resultText = 'Классическая музыка - вы цените глубину и размышления.';
+        } else if (score === 8) {
+            resultText = 'Метал - вы сильны и не склонны к эмоциональным переживаниям.';
+        } else if (score === 7) {
+            resultText = 'Джаз - вы творческий и свободолюбивый человек.';
+        } else if (score === 6) {
+            resultText = 'Хип-хоп - вы уверены в себе и любите быть в центре внимания.';
+        } else if (score === 5) {
+            resultText = 'Рок - вы независимы и энергичны.';
+        } else if (score === 4) {
+            resultText = 'Инди - вы оригинальны и независимы в своих предпочтениях.';
+        } else if (score === 3) {
+            resultText = 'Кантри - вы предпочитаете спокойствие и традиции.';
+        } else if (score === 2) {
+            resultText = 'Рэгги - вы позитивный и открытый человек.';
+        } else {
+            resultText = 'Ретро - вы цените ностальгию и традиции.';
+        }
+
+        document.getElementById('musicType').textContent = resultText;
+        document.getElementById('result').style.display = 'block';
+    });
+</script>
+
+</body>
+</html>
